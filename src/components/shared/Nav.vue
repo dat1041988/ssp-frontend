@@ -89,7 +89,7 @@
       }
     },
     created: function() {
-      this.$http.get('/config').then(res => this.config = res.body)
+      this.$http.get(this.$store.state.backendURL + '/config').then(res => this.config = res.body)
     },
     methods: {
       logout() {

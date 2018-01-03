@@ -49,7 +49,7 @@
           if (result) {
             this.loading = true;
 
-            this.$http.post('/login', {
+            this.$http.post(this.$store.state.backendURL + '/login', {
               username: this.username,
               password: this.password
             }).then(res => {
