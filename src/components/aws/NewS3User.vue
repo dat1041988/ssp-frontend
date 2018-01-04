@@ -77,7 +77,7 @@
     methods: {
       getUsersBuckets: function() {
         this.loading = true;
-        this.$http.get('/api/aws/s3').then((res) => {
+        this.$http.get(this.$store.state.backendURL + '/api/aws/s3').then((res) => {
           this.buckets = res.body.buckets;
           this.loading = false;
         }, () => {
@@ -89,9 +89,9 @@
           if (result) {
             this.loading = true;
 
-            this.$http.post('/api/aws/s3/' + this.bucket + '/user', {
+            this.$http.post(this.$store.state.backendURL + '/api/aws/s3/' + this.bucket + '/user', {
               username: this.username,
-              isReadonly: this.isReadonly == "true"
+              isReadonly: this.isReadonly === 'true'
             }).then(() => {
               this.loading = false;
             }, () => {

@@ -60,7 +60,7 @@
           if (result) {
             this.loading = true;
 
-            this.$http.post('/api/ose/billing', {
+            this.$http.post(this.$store.state.backendURL + '/api/ose/billing', {
               project: this.project,
               billing: this.billing
             }).then(() => {
@@ -72,7 +72,7 @@
         });
       },
       getExistingBillingData: function() {
-        this.$http.get('/api/ose/billing/' + this.project).then(() => {
+        this.$http.get(this.$store.state.backendURL + '/api/ose/billing/' + this.project).then(() => {
           this.loading = false;
         }, () => {
           this.loading = false;

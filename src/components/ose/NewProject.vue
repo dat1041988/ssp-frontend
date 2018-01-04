@@ -61,7 +61,7 @@
           if (result) {
             this.loading = true;
 
-            this.$http.post('/api/ose/project', {
+            this.$http.post(this.$store.state.backendURL + '/api/ose/project', {
               project: this.project,
               billing: this.billing,
               megaId: this.megaId

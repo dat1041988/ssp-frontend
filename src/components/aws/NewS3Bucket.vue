@@ -92,7 +92,7 @@
           if (result) {
             this.loading = true;
 
-            this.$http.post('/api/aws/s3', {
+            this.$http.post(this.$store.state.backendURL + '/api/aws/s3', {
               project: this.project,
               bucketname: this.bucketname,
               billing: '' + this.billing,

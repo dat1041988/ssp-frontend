@@ -73,7 +73,7 @@
       getDDCBilling: function() {
         this.loading = true;
 
-        this.$http.get('/api/ddc/billing').then((res) => {
+        this.$http.get(this.$store.state.backendURL + '/api/ddc/billing').then((res) => {
           this.data = res.body.rows;
           let blob = new Blob([res.body.csv], {type: 'text/csv'});
 

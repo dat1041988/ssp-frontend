@@ -45,7 +45,7 @@
     methods: {
       listS3Buckets: function() {
         this.loading = true;
-        this.$http.get('/api/aws/s3').then((res) => {
+        this.$http.get(this.$store.state.backendURL + '/api/aws/s3').then((res) => {
           this.data = res.body.buckets;
           this.loading = false;
         }, () => {

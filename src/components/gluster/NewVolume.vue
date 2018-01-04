@@ -88,7 +88,7 @@
           if (result) {
             this.loading = true;
 
-            this.$http.post('/api/gluster/volume', {
+            this.$http.post(this.$store.state.backendURL + '/api/gluster/volume', {
               project: this.project,
               size: this.size,
               pvcName: this.pvcName,

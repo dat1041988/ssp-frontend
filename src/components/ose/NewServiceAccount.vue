@@ -56,7 +56,7 @@
           if (result) {
             this.loading = true;
 
-            this.$http.post('/api/ose/serviceaccount', {
+            this.$http.post(this.$store.state.backendURL + '/api/ose/serviceaccount', {
               project: this.project,
               serviceAccount: this.serviceAccount
             }).then(() => {

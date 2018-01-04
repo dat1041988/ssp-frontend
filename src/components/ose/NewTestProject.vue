@@ -67,7 +67,7 @@
           if (result) {
             this.loading = true;
 
-            this.$http.post('/api/ose/testproject', {
+            this.$http.post(this.$store.state.backendURL + '/api/ose/testproject', {
               project: this.testprojectname
             }).then(() => {
               this.loading = false;

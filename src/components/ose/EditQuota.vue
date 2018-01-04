@@ -66,7 +66,7 @@
           if (result) {
             this.loading = true;
 
-            this.$http.post('/api/ose/quotas', {
+            this.$http.post(this.$store.state.backendURL + '/api/ose/quotas', {
               project: this.project,
               cpu: '' + this.cpu,
               memory: '' + this.memory

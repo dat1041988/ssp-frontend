@@ -76,7 +76,7 @@
           if (result) {
             this.loading = true;
 
-            this.$http.post('/api/gluster/volume/grow', {
+            this.$http.post(this.$store.state.backendURL + '/api/gluster/volume/grow', {
               project: this.project,
               newSize: this.newSize,
               pvName: this.pvName

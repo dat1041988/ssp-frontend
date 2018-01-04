@@ -64,7 +64,7 @@
           if (result) {
             this.loading = true;
 
-            this.$http.get('/api/ose/project/' + this.projectname + '/admins').then((res) => {
+            this.$http.get(this.$store.state.backendURL + '/api/ose/project/' + this.projectname + '/admins').then((res) => {
               this.loading = false;
 
               this.data = res.body.admins;
