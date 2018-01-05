@@ -30,9 +30,10 @@
         <br><br>
         <label><strong>Administratoren</strong></label><br><br>
         <b-table :data="data"
-                 :narrowed="true">
+                 :narrowed="true"
+                 :loading="loading">
 
-            <template scope="props">
+            <template slot-scope="props">
                 <b-table-column field="sender" label="Benutzername">
                     {{ props.row }}
                 </b-table-column>

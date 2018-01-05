@@ -14,7 +14,7 @@
                  v-bind:class="{'is-loading': loading}"
                  :narrowed="true">
 
-            <template scope="props">
+            <template slot-scope="props">
                 <b-table-column field="name" label="Bucket-Name">
                     {{ props.row.name }}
                 </b-table-column>

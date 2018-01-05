@@ -57,6 +57,14 @@
                         <router-link to="/aws/news3user" class="navbar-item">AWS S3 Bucket Benutzer erstellen</router-link>
                     </div>
                 </div>
+                <div v-if="user" class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        Sematext
+                    </a>
+                    <div class="navbar-dropdown">
+                        <router-link to="/sematext/applist" class="navbar-item">Sematext Logsene-Apps anzeigen</router-link>
+                    </div>
+                </div>
             </div>
 
             <div class="navbar-end">

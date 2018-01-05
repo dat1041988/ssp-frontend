@@ -23,7 +23,7 @@
         <b-table :data="data"
                  :narrowed="true">
 
-            <template scope="props">
+            <template slot-scope="props">
                 <b-table-column field="sender" label="Von" width="40">
                     {{ props.row.sender }}
                 </b-table-column>

@@ -22,32 +22,35 @@ import DDCBilling from './components/ddc/Billing.vue';
 import ListS3Buckets from './components/aws/ListS3Buckets.vue';
 import NewS3Bucket from './components/aws/NewS3Bucket.vue';
 import NewS3User from './components/aws/NewS3User.vue';
+// Sematext Components
+import AppList from './components/sematext/AppList.vue';
 
 Vue.component('login', Login);
 Vue.component('navbar', Nav);
 Vue.component('notification', Notification);
 
 export const GlobalComponents = {
-  App,
-  Login
+    App,
+    Login
 };
 
 export const LocalComponents = {
-  Home,
-  EditQuota,
-  NewProject,
-  AdminList,
-  NewTestProject,
-  UpdateBilling,
-  NewServiceAccount,
-  FixVolume,
-  NewVolume,
-  GrowVolume,
-  DDCBilling,
-  ListS3Buckets,
-  NewS3Bucket,
-  NewS3User
-}
+    Home,
+    EditQuota,
+    NewProject,
+    AdminList,
+    NewTestProject,
+    UpdateBilling,
+    NewServiceAccount,
+    FixVolume,
+    NewVolume,
+    GrowVolume,
+    DDCBilling,
+    ListS3Buckets,
+    NewS3Bucket,
+    NewS3User,
+    AppList
+};
 
 
 
