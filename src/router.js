@@ -48,7 +48,10 @@ const routes = [
         path: '/aws/news3user', component: LocalComponents.NewS3User
     },
     {
-        path: '/sematext/applist', component: LocalComponents.AppList
+        path: '/sematext/applist', component: LocalComponents.SematextAppList
+    },
+    {
+        path: '/sematext/changebilling', component: LocalComponents.SematextChangeBilling
     }
 ];
 

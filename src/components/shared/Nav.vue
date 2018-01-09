@@ -54,7 +54,8 @@
                     <div class="navbar-dropdown">
                         <router-link to="/aws/lists3buckets" class="navbar-item">AWS S3 Buckets anzeigen</router-link>
                         <router-link to="/aws/news3bucket" class="navbar-item">AWS S3 Bucket erstellen</router-link>
-                        <router-link to="/aws/news3user" class="navbar-item">AWS S3 Bucket Benutzer erstellen</router-link>
+                        <router-link to="/aws/news3user" class="navbar-item">AWS S3 Bucket Benutzer erstellen
+                        </router-link>
                     </div>
                 </div>
                 <div v-if="user" class="navbar-item has-dropdown is-hoverable">
@@ -62,19 +63,23 @@
                         Sematext
                     </a>
                     <div class="navbar-dropdown">
-                        <router-link to="/sematext/applist" class="navbar-item">Sematext Logsene-Apps anzeigen</router-link>
+                        <router-link to="/sematext/applist" class="navbar-item">Logsene-Apps anzeigen</router-link>
+                        <router-link to="/sematext/newapp" class="navbar-item">Logsene-Apps erstellen</router-link>
+                        <router-link to="/sematext/changebilling" class="navbar-item">Logsene-Apps Kontierungsnummer
+                            anzeigen/ändern
+                        </router-link>
                     </div>
                 </div>
             </div>
 
             <div class="navbar-end">
                 <router-link v-if="!user" to="/login" class="navbar-item">
-                    <b-icon icon="person"></b-icon>
-                    Login
+                    <b-icon icon="face"></b-icon>
+                    &nbsp; Login
                 </router-link>
                 <a v-if="user" class="navbar-item" v-on:click="logout">
-                    <b-icon icon="person"></b-icon>
-                    Hallo {{user.name }} - Logout
+                    <b-icon icon="face"></b-icon>
+                    &nbsp; Hallo {{user.name }} - Logout
                 </a>
             </div>
         </div>
@@ -83,56 +88,56 @@
 
 <style>
     #navMain {
-        background-color: #4a4a4a;
+        background-color: #222;
     }
 </style>
 
 <script>
-  export default {
-    computed: {
-      user() {
-        return this.$store.state.user;
-      }
-    },
-    data: function() {
-      return {
-        config: {
-          ddc: false,
-          gluster: false
+    export default {
+        computed: {
+            user() {
+                return this.$store.state.user;
+            }
+        },
+        data: function () {
+            return {
+                config: {
+                    ddc: false,
+                    gluster: false
+                }
+            }
+        },
+        created: function () {
+            this.$http.get(this.$store.state.backendURL + '/config').then(res => this.config = res.body)
+        },
+        methods: {
+            logout() {
+                this.$store.commit('setUser', {user: null});
+                this.$toast.open({
+                    type: 'is-success',
+                    message: 'Du wurdest ausgeloggt'
+                });
+                this.$router.push({path: '/login'})
+            }
         }
-      }
-    },
-    created: function() {
-      this.$http.get(this.$store.state.backendURL + '/config').then(res => this.config = res.body)
-    },
-    methods: {
-      logout() {
-        this.$store.commit('setUser', {user: null});
-        this.$toast.open({
-          type: 'is-success',
-          message: 'Du wurdest ausgeloggt'
-        });
-        this.$router.push({path: '/login'})
-      }
     }
-  }
 
-  document.addEventListener('DOMContentLoaded', function() {
-    // Get all "navbar-burger" elements
-    var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-    // Check if there are any nav burgers
-    if ($navbarBurgers.length > 0) {
-      // Add a click event on each of them
-      $navbarBurgers.forEach(function($el) {
-        $el.addEventListener('click', function() {
-          // Get the target from the "data-target" attribute
-          var target = $el.dataset.target;
-          var $target = document.getElementById(target);
-          // Toggle the class on both the "navbar-burger" and the "navbar-menu"
-          $el.classList.toggle('is-active');
-          $target.classList.toggle('is-active');
-        });
-      });
-    }
-  });
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get all "navbar-burger" elements
+        var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+        // Check if there are any nav burgers
+        if ($navbarBurgers.length > 0) {
+            // Add a click event on each of them
+            $navbarBurgers.forEach(function ($el) {
+                $el.addEventListener('click', function () {
+                    // Get the target from the "data-target" attribute
+                    var target = $el.dataset.target;
+                    var $target = document.getElementById(target);
+                    // Toggle the class on both the "navbar-burger" and the "navbar-menu"
+                    $el.classList.toggle('is-active');
+                    $target.classList.toggle('is-active');
+                });
+            });
+        }
+    });
 </script>

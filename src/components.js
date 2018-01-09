@@ -23,7 +23,8 @@ import ListS3Buckets from './components/aws/ListS3Buckets.vue';
 import NewS3Bucket from './components/aws/NewS3Bucket.vue';
 import NewS3User from './components/aws/NewS3User.vue';
 // Sematext Components
-import AppList from './components/sematext/AppList.vue';
+import SematextAppList from './components/sematext/AppList.vue';
+import SematextChangeBilling from './components/sematext/ChangeBilling.vue';
 
 Vue.component('login', Login);
 Vue.component('navbar', Nav);
@@ -49,7 +50,8 @@ export const LocalComponents = {
     ListS3Buckets,
     NewS3Bucket,
     NewS3User,
-    AppList
+    SematextAppList,
+    SematextChangeBilling
 };
 
 

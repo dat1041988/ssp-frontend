@@ -6,7 +6,8 @@
                     <h1 class="title"><i class="material-icons">perm_identity</i> AWS S3 Bucket-Benutzer erstellen</h1>
                 </div>
                 <h2 class="subtitle">
-                    Hier kannst du einen Benutzer zu einem AWS S3 Bucket erstellen. Alle Bestellungen werden geloggt & verrechnet.</h2>
+                    Hier kannst du einen Benutzer zu einem AWS S3 Bucket erstellen. Alle Bestellungen werden geloggt &
+                    verrechnet.</h2>
             </div>
         </div>
         <br>
@@ -61,45 +62,45 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        buckets: [],
-        username: '',
-        bucket: '',
-        isReadonly: "true",
-        loading: false
-      };
-    },
-    mounted: function() {
-      this.getUsersBuckets();
-    },
-    methods: {
-      getUsersBuckets: function() {
-        this.loading = true;
-        this.$http.get(this.$store.state.backendURL + '/api/aws/s3').then((res) => {
-          this.buckets = res.body.buckets;
-          this.loading = false;
-        }, () => {
-          this.loading = false;
-        });
-      },
-      newS3User: function() {
-        this.$validator.validateAll().then((result) => {
-          if (result) {
-            this.loading = true;
+    export default {
+        data() {
+            return {
+                buckets: [],
+                username: '',
+                bucket: '',
+                isReadonly: "true",
+                loading: false
+            };
+        },
+        mounted: function () {
+            this.getUsersBuckets();
+        },
+        methods: {
+            getUsersBuckets: function () {
+                this.loading = true;
+                this.$http.get(this.$store.state.backendURL + '/api/aws/s3').then((res) => {
+                    this.buckets = res.body.buckets;
+                    this.loading = false;
+                }, () => {
+                    this.loading = false;
+                });
+            },
+            newS3User: function () {
+                this.$validator.validateAll().then((result) => {
+                    if (result) {
+                        this.loading = true;
 
-            this.$http.post(this.$store.state.backendURL + '/api/aws/s3/' + this.bucket + '/user', {
-              username: this.username,
-              isReadonly: this.isReadonly === 'true'
-            }).then(() => {
-              this.loading = false;
-            }, () => {
-              this.loading = false;
-            });
-          }
-        });
-      }
-    }
-  };
+                        this.$http.post(this.$store.state.backendURL + '/api/aws/s3/' + this.bucket + '/user', {
+                            username: this.username,
+                            isReadonly: this.isReadonly === 'true'
+                        }).then(() => {
+                            this.loading = false;
+                        }, () => {
+                            this.loading = false;
+                        });
+                    }
+                });
+            }
+        }
+    };
 </script>
