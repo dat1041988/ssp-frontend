@@ -81,6 +81,12 @@
     </nav>
 </template>
 
+<style>
+    #navMain {
+        background-color: #4a4a4a;
+    }
+</style>
+
 <script>
   export default {
     computed: {
