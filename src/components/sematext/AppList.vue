@@ -30,11 +30,8 @@
                             :type="props.row.isFree ? 'is-success' : 'is-danger'">
                     </b-icon>
                 </b-table-column>
-                <b-table-column field="pricePerDay" label="Kosten pro Tag">
-                    {{ props.row.pricePerDay }}
-                </b-table-column>
-                <b-table-column field="maxDailyEvents" label="Max. Logs pro Tag">
-                    {{ props.row.maxDailyEvents }}
+                <b-table-column field="pricePerMonth" label="Kosten pro Monat">
+                    {{ props.row.pricePerMonth }}$
                 </b-table-column>
                 <b-table-column field="billingInfo" label="Kontierungsdaten">
                     {{ props.row.billingInfo }}

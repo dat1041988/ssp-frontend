@@ -52,6 +52,9 @@ const routes = [
     },
     {
         path: '/sematext/changebilling', component: LocalComponents.SematextChangeBilling
+    },
+    {
+        path: '/sematext/changeplan', component: LocalComponents.SematextChangePlan
     }
 ];
 

@@ -65,8 +65,10 @@
                     <div class="navbar-dropdown">
                         <router-link to="/sematext/applist" class="navbar-item">Logsene-Apps anzeigen</router-link>
                         <router-link to="/sematext/newapp" class="navbar-item">Logsene-Apps erstellen</router-link>
-                        <router-link to="/sematext/changebilling" class="navbar-item">Logsene-Apps Kontierungsnummer
-                            anzeigen/ändern
+                        <router-link to="/sematext/changeplan" class="navbar-item">Logsene-Apps Plan & Limite ändern
+                        </router-link>
+                        <router-link to="/sematext/changebilling" class="navbar-item">Logsene-Apps Projekt & Kontierungsnummer
+                            ändern
                         </router-link>
                     </div>
                 </div>

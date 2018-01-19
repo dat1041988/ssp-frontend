@@ -13,9 +13,9 @@
         </div>
         <br>
         <form v-on:submit.prevent="updateSematextBilling">
-            <b-field label="Sematext Logsene-App"
-                     :type="errors.has('Sematext Logsene-App') ? 'is-danger' : ''"
-                     :message="errors.first('Sematext Logsene-App')">
+            <b-field label="Logsene-App"
+                     :type="errors.has('Logsene-App') ? 'is-danger' : ''"
+                     :message="errors.first('Logsene-App')">
 
                 <b-select placeholder="Wähle die App aus"
                           :loading="loading"
@@ -30,7 +30,7 @@
                 </b-select>
             </b-field>
 
-            <b-field label="Neues Projekt"
+            <b-field label="Name vom Projekt"
                      :type="errors.has('Projekt') ? 'is-danger' : ''"
                      :message="errors.first('Projekt')">
                 <b-input v-model.trim="project"
