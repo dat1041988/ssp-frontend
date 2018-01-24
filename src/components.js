@@ -24,6 +24,7 @@ import NewS3Bucket from './components/aws/NewS3Bucket.vue';
 import NewS3User from './components/aws/NewS3User.vue';
 // Sematext Components
 import SematextAppList from './components/sematext/AppList.vue';
+import SematextNewApp from './components/sematext/NewApp.vue';
 import SematextChangeBilling from './components/sematext/ChangeBilling.vue';
 import SematextChangePlan from './components/sematext/ChangePlan.vue';
 
@@ -52,6 +53,7 @@ export const LocalComponents = {
     NewS3Bucket,
     NewS3User,
     SematextAppList,
+    SematextNewApp,
     SematextChangeBilling,
     SematextChangePlan
 };
