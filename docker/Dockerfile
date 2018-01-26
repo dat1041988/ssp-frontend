@@ -14,8 +14,8 @@ RUN ls -la && tar xfvz self-service-portal-frontend.tar.gz && mv dist/* /usr/sha
 ADD start.sh /usr/share/nginx/start.sh
 RUN chmod +x /usr/share/nginx/start.sh
 
-# Fix permissions for OpenShift runtime
-RUN chmod 777 /var/log/nginx /usr/share/nginx/html
+# Fix permissions for OpenShift runtime (random user)
+RUN chmod 777 /var/log/nginx /usr/share/nginx/html /var/cache/nginx/
 
 # Remove build deps
 RUN apt-get purge -y --auto-remove wget curl
