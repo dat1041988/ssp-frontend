@@ -3,7 +3,7 @@ FROM nginx:1.13.8
 MAINTAINER Reto Lehmann <reto.lehmann@sbb.ch>
 
 # Install build deps
-RUN apt-get -qq -y install wget curl
+RUN apt-get update && apt-get install -y wget curl
 
 # Download latest release from github
 RUN curl -s https://api.github.com/repos/oscp/cloud-selfservice-portal-frontend/releases/latest -k \
