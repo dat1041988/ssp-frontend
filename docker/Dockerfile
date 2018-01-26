@@ -11,6 +11,7 @@ RUN curl -s https://api.github.com/repos/oscp/cloud-selfservice-portal-frontend/
 
 RUN ls -la && tar xfvz self-service-portal-frontend.tar.gz && mv dist/* /usr/share/nginx/html && rm -f self-service-portal-frontend.tar.gz
 
+ADD nginx.conf /etc/nginx/nginx.conf
 ADD start.sh /usr/share/nginx/start.sh
 RUN chmod +x /usr/share/nginx/start.sh
 
@@ -19,5 +20,7 @@ RUN chmod 777 /var/log/nginx /usr/share/nginx/html /var/cache/nginx/
 
 # Remove build deps
 RUN apt-get purge -y --auto-remove wget curl
+
+EXPOSE 8080
 
 CMD /usr/share/nginx/start.sh
