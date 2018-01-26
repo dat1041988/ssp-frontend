@@ -7,7 +7,7 @@ This is the web UI for https://github.com/oscp/cloud-selfservice-portal-backend.
 ## Self-Service Portal Frontend
 ```bash
 # Create a OpenShift project for the frontend
-oc new-project sbb-selfservice-frontend
+oc new-project ose-selfservice-frontend
 
 # Start the frontend with 
 oc new-app <yourimage:version>
