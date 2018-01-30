@@ -2,8 +2,7 @@ language: node
 script:
 - npm install
 - npm run build
-- cp index.html ./dist/
-- tar -zcvf self-service-portal-frontend.tar.gz dist
+- tar -zcvf self-service-portal-frontend.tar.gz dist index.html
 deploy:
   skip_cleanup: true
   provider: releases
