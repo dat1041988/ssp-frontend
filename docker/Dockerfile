@@ -15,7 +15,7 @@ ADD start.sh /usr/share/nginx/start.sh
 
 # Fix permissions for OpenShift runtime (random user)
 RUN chmod +x /usr/share/nginx/start.sh \
-    && chmod 777 /var/log/nginx /usr/share/nginx/html /var/cache/nginx/
+    && chmod 777 /var/log/nginx /usr/share/nginx/html /usr/share/nginx/html/dist /var/cache/nginx/
 
 EXPOSE 8080
 
