@@ -6,7 +6,8 @@ MAINTAINER Reto Lehmann <reto.lehmann@sbb.ch>
 RUN apt-get update && apt-get install -y wget curl \
   && curl -s https://api.github.com/repos/oscp/cloud-selfservice-portal-frontend/releases/latest -k \
      | grep "browser_download_url" | cut -d : -f 2,3 | tr -d \" | wget -qi - \
-  && tar xfvz self-service-portal-frontend.tar.gz && mv dist /usr/share/nginx/html && rm -f self-service-portal-frontend.tar.gz \
+  && tar xfvz self-service-portal-frontend.tar.gz && mv index.html /usr/share/nginx/html \
+  && mv dist /usr/share/nginx/html && rm -f self-service-portal-frontend.tar.gz \
   && apt-get purge -y --auto-remove wget curl
 
 ADD nginx.conf /etc/nginx/nginx.conf
