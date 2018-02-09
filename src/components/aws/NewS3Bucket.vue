@@ -30,8 +30,9 @@
                 </b-input>
             </b-field>
             <b-message type="is-info">
-                Der Name des S3-Buckets wird mit deinen Angaben wie folgt zusammengestellt: sbb-[BucketName]-prod/nonprod
-                    Beispiel: sbb-my-bucket-prod oder sbb-my-app-prod
+                Der Name des S3-Buckets wird mit deinen Angaben wie folgt zusammengestellt:
+                <br/>sbb-[BucketName]-prod/nonprod
+                <br/><br/>Beispiel: sbb-my-bucket-prod oder sbb-my-app-prod
             </b-message>
 
             <b-field label="Kontierungsnummer"
