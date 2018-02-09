@@ -39,9 +39,12 @@
                      :message="errors.first('PVC-Name')">
                 <b-input v-model.trim="pvcName"
                          name="PVC-Name"
-                         v-validate="'required'">
+                         v-validate="{ rules: { required: true, regex: /^[a-z0-9]([-a-z0-9]*[a-z0-9])$/} }">
                 </b-input>
             </b-field>
+            <b-message type="is-info">
+                Name des Persistent Volume Claims darf nur Kleinbuchstaben, Zahlen und - enthalten
+            </b-message>
 
             <label class="label">Verwendungsmodus</label>
             <b-field>
