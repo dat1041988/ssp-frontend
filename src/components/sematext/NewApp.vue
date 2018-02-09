@@ -22,7 +22,7 @@
             </b-field>
 
             <b-message type="is-info">
-                Sematext Logsene Pläne siehe: <a href="https://sematext.com/logsene/pricing/">Plans & Pricing</a><br/>
+                Sematext Logsene Pläne siehe: <a href="https://confluence.sbb.ch/x/AisiMg">Log-Management Kosten</a><br/>
                 - Die max. MB pro Tag sind vom Plan abhängig.<br/>
                 - Man sollte den Plan so wählen, dass die effektive Logmenge knapp unter dem "Default MB" vom Plan ist.<br/>
                 - Die tägliche MB-Limite so erhöhen, dass die tägliche Menge etwas darunter liegt (Puffer).<br/>
