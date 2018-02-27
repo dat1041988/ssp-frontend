@@ -58,6 +58,12 @@ const routes = [
     },
     {
         path: '/sematext/changeplan', component: LocalComponents.SematextChangePlan
+    },
+    {
+        path: '/wzu/confluence', component: LocalComponents.WZUConfluence
+    },
+    {
+        path: '/wzu/JIRA', component: LocalComponents.WZUJira
     }
 ];
 

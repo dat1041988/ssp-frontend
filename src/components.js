@@ -27,6 +27,10 @@ import SematextAppList from './components/sematext/AppList.vue';
 import SematextNewApp from './components/sematext/NewApp.vue';
 import SematextChangeBilling from './components/sematext/ChangeBilling.vue';
 import SematextChangePlan from './components/sematext/ChangePlan.vue';
+// WZU Components
+import WZUConfluence from './components/wzu/Confluence.vue';
+import WZUJira from './components/wzu/JIRA.vue';
+
 
 Vue.component('login', Login);
 Vue.component('navbar', Nav);
@@ -55,7 +59,9 @@ export const LocalComponents = {
     SematextAppList,
     SematextNewApp,
     SematextChangeBilling,
-    SematextChangePlan
+    SematextChangePlan,
+    WZUConfluence,
+    WZUJira
 };
 
 

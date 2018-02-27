@@ -72,7 +72,19 @@
                         </router-link>
                     </div>
                 </div>
+
+                <div v-if="user" class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        WZU
+                    </a>
+                    <div class="navbar-dropdown">
+                        <router-link to="/wzu/confluence" class="navbar-item">Confluence</router-link>
+                        <router-link to="/wzu/jira" class="navbar-item">JIRA</router-link>
+                    </div>
+                </div>
             </div>
+
+
 
             <div class="navbar-end">
                 <router-link v-if="!user" to="/login" class="navbar-item">
