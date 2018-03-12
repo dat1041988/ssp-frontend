@@ -44,8 +44,12 @@ const routes = [
     },
     {
         path: '/aws/news3bucket', component: LocalComponents.NewS3Bucket
-    }, {
+    },
+    {
         path: '/aws/news3user', component: LocalComponents.NewS3User
+    },
+    {
+        path: '/aws/listec2instances', component: LocalComponents.ListEC2Instances
     },
     {
         path: '/sematext/newapp', component: LocalComponents.SematextNewApp

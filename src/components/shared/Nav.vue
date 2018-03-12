@@ -54,8 +54,8 @@
                     <div class="navbar-dropdown">
                         <router-link to="/aws/lists3buckets" class="navbar-item">AWS S3 Buckets anzeigen</router-link>
                         <router-link to="/aws/news3bucket" class="navbar-item">AWS S3 Bucket erstellen</router-link>
-                        <router-link to="/aws/news3user" class="navbar-item">AWS S3 Bucket Benutzer erstellen
-                        </router-link>
+                        <router-link to="/aws/news3user" class="navbar-item">AWS S3 Bucket Benutzer erstellen</router-link>
+                        <router-link to="/aws/listec2instances" class="navbar-item">AWS EC2 Instanzen anzeigen</router-link>
                     </div>
                 </div>
                 <div v-if="user" class="navbar-item has-dropdown is-hoverable">
