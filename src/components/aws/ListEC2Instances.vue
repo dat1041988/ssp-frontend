@@ -66,20 +66,22 @@
         var nextState;
 
         // check if instance is already changing state
-        if (row.state == 'pending' || row.state == 'stopping') {
+        if (row.state == 'pending' || row.state == 'stopping' || row.state == 'terminated') {
           return
         }
 
         // use running as conditional! the 'else' case should not be stop
         nextState = (row.state == 'running') ? 'stop' : 'start';
-        // change state so that user interface is responsive
-        row.state = (row.state == 'running') ? 'stopping' : 'pending';
 
-        this.$http.post(this.$store.state.backendURL + '/api/aws/ec2/' + row.id + '/' + nextState).then((res) => {
-          row.state = res.body.state;
-        }, () => {
-          row.state = 'unknown';
-        });
+        if (nextState == 'start' || confirm("Are you sure you want to stop " + row.name + "?")) {
+          // change state so that user interface is responsive
+          row.state = (row.state == 'running') ? 'stopping' : 'pending';
+          this.$http.post(this.$store.state.backendURL + '/api/aws/ec2/' + row.id + '/' + nextState).then((res) => {
+            row.state = res.body.state;
+          }, () => {
+            row.state = 'unknown';
+          });
+        }
       },
       getStateIcon: function(row) {
         switch (row.state) {
