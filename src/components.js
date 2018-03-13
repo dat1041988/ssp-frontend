@@ -22,6 +22,7 @@ import DDCBilling from './components/ddc/Billing.vue';
 import ListS3Buckets from './components/aws/ListS3Buckets.vue';
 import NewS3Bucket from './components/aws/NewS3Bucket.vue';
 import NewS3User from './components/aws/NewS3User.vue';
+import ListEC2Instances from './components/aws/ListEC2Instances.vue';
 // Sematext Components
 import SematextAppList from './components/sematext/AppList.vue';
 import SematextNewApp from './components/sematext/NewApp.vue';
@@ -50,6 +51,7 @@ export const LocalComponents = {
     GrowVolume,
     DDCBilling,
     ListS3Buckets,
+    ListEC2Instances,
     NewS3Bucket,
     NewS3User,
     SematextAppList,
