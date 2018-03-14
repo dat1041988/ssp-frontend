@@ -16,8 +16,7 @@
                 - Du kannst jederzeit ein Testprojekt erstellen um etwas auszuprobieren. Es entstehen keine Kosten.<br/>
                 - Ein Test-Projekt enthält deine u-Nummer<br/>
                 - Pods aus einem Test-Projekt können jederzeit durch das Cloud-Team gestoppt werden<br/>
-                - Bitte das Testprojekt nach Ende des Tests selbst löschen<br/>
-                - Nicht gelöschte Testprojekte werden durch das Cloud-Team gelöscht<br/>
+                - Test-Projekte werden automatisch und ohne Rückfrage nach 30 Tagen gelöscht<br/>
             </div>
         </article>
         <form v-on:submit.prevent="newTestProject">
