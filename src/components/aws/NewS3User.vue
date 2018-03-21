@@ -39,6 +39,12 @@
                 </b-input>
             </b-field>
 
+            <b-message type="is-info">
+                Der Name des neuen Benutzers wird mit deinen Angaben wie folgt zusammengestellt:
+                <br/>[BucketName]-[Benutzername]
+                <br/><br/>Beispiel: sbb-my-bucket-prod-user oder sbb-my-app-prod-admin
+            </b-message>
+
             <label class="label">Rechte: Lesen / Schreiben</label>
             <b-field>
                 <b-radio-button v-model="isReadonly"
