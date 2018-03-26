@@ -10,7 +10,7 @@ This is the web UI for https://github.com/oscp/cloud-selfservice-portal-backend.
 oc new-project ose-selfservice-frontend
 
 # Start the frontend with
-oc new-app <yourimage:version>
+oc new-app -p SSP_BACKEND_URL=https://backend-url.com -f ssp-frontend-template.json
 ```
 
 ### Environment variables
