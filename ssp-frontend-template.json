@@ -1,0 +1,215 @@
+{
+    "kind": "Template",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "ssp-frontend"
+    },
+    "objects": [
+        {
+            "kind": "DeploymentConfig",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "ssp-frontend",
+                "labels": {
+                    "app": "ssp-frontend"
+                }
+            },
+            "spec": {
+                "strategy": {
+                    "type": "Rolling",
+                    "rollingParams": {
+                        "updatePeriodSeconds": 1,
+                        "intervalSeconds": 1,
+                        "timeoutSeconds": 600,
+                        "maxUnavailable": "25%",
+                        "maxSurge": "25%"
+                    },
+                    "resources": {},
+                    "activeDeadlineSeconds": 21600
+                },
+                "triggers": [
+                    {
+                        "type": "ConfigChange"
+                    },
+                    {
+                        "type": "ImageChange",
+                        "imageChangeParams": {
+                            "automatic": true,
+                            "containerNames": [
+                                "ssp-frontend"
+                            ],
+                            "from": {
+                                "kind": "ImageStreamTag",
+                                "name": "ssp-frontend:latest"
+                            }
+                        }
+                    }
+                ],
+                "replicas": 1,
+                "test": false,
+                "selector": {
+                    "app": "ssp-frontend",
+                    "deploymentconfig": "ssp-frontend"
+                },
+                "template": {
+                    "metadata": {
+                        "labels": {
+                            "app": "ssp-frontend",
+                            "deploymentconfig": "ssp-frontend"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "name": "ssp-frontend",
+                                "image": "ssp-frontend",
+                                "ports": [
+                                    {
+                                        "containerPort": 8080,
+                                        "protocol": "TCP"
+                                    }
+                                ],
+                                "env": [
+                                    {
+                                        "name": "SSP_BACKEND_URL",
+                                        "value": "${SSP_BACKEND_URL}"
+                                    },
+                                    {
+                                        "name": "WZU_BACKEND_URL",
+                                        "value": "${WZU_BACKEND_URL}"
+                                    }
+                                ],
+                                "resources": {},
+                                "livenessProbe": {
+                                    "httpGet": {
+                                        "path": "/",
+                                        "port": 8080,
+                                        "scheme": "HTTP"
+                                    },
+                                    "initialDelaySeconds": 1,
+                                    "timeoutSeconds": 10,
+                                    "periodSeconds": 10,
+                                    "successThreshold": 1,
+                                    "failureThreshold": 3
+                                },
+                                "readinessProbe": {
+                                    "httpGet": {
+                                        "path": "/",
+                                        "port": 8080,
+                                        "scheme": "HTTP"
+                                    },
+                                    "initialDelaySeconds": 1,
+                                    "timeoutSeconds": 10,
+                                    "periodSeconds": 10,
+                                    "successThreshold": 1,
+                                    "failureThreshold": 3
+                                },
+                                "terminationMessagePath": "/dev/termination-log",
+                                "terminationMessagePolicy": "File",
+                                "imagePullPolicy": "Always"
+                            }
+                        ],
+                        "restartPolicy": "Always",
+                        "terminationGracePeriodSeconds": 30,
+                        "dnsPolicy": "ClusterFirst",
+                        "securityContext": {},
+                        "schedulerName": "default-scheduler"
+                    }
+                }
+            }
+        },
+        {
+            "kind": "Route",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "ssp-frontend"
+            },
+            "spec": {
+                "host": "${APP_ROUTE}",
+                "to": {
+                    "kind": "Service",
+                    "name": "ssp-frontend",
+                    "weight": 100
+                },
+                "port": {
+                    "targetPort": "8080-tcp"
+                },
+                "tls": {
+                    "termination": "edge",
+                    "insecureEdgeTerminationPolicy": "Redirect"
+                },
+                "wildcardPolicy": "None"
+            }
+        },
+        {
+            "kind": "Service",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "ssp-frontend",
+                "labels": {
+                    "app": "ssp-frontend"
+                }
+            },
+            "spec": {
+                "ports": [
+                    {
+                        "name": "8080-tcp",
+                        "protocol": "TCP",
+                        "port": 8080,
+                        "targetPort": 8080
+                    }
+                ],
+                "selector": {
+                    "deploymentconfig": "ssp-frontend"
+                },
+                "type": "ClusterIP",
+                "sessionAffinity": "None"
+            }
+        },
+        {
+            "kind": "ImageStream",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "ssp-frontend",
+                "labels": {
+                    "app": "ssp-frontend"
+                }
+            },
+            "spec": {
+                "tags": [
+                    {
+                        "name": "latest",
+                        "from": {
+                            "kind": "DockerImage",
+                            "name": "${DOCKER_IMAGE}"
+                        },
+                        "importPolicy": {
+                            "scheduled": false
+                        }
+                    }
+                ]
+            }
+        }
+    ],
+    "parameters": [
+        {
+            "name": "APP_ROUTE",
+            "description": "The route that Openshift exposes"
+        },
+        {
+            "name": "DOCKER_IMAGE",
+            "description": "The docker image and version (user/image:tag)",
+            "value": "oscp/cloud-selfservice-portal-frontend:v1.1.4",
+            "required": true
+        },
+        {
+            "name": "SSP_BACKEND_URL",
+            "description": "The url of the backend",
+            "required": true
+        },
+        {
+            "name": "WZU_BACKEND_URL",
+            "description": "The url of the tools backend"
+        }
+    ]
+}
