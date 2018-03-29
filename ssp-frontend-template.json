@@ -125,6 +125,7 @@
                 "name": "ssp-frontend"
             },
             "spec": {
+                "host": "${APP_ROUTE}",
                 "to": {
                     "kind": "Service",
                     "name": "ssp-frontend",
@@ -183,7 +184,7 @@
                             "name": "${DOCKER_IMAGE}"
                         },
                         "importPolicy": {
-                            "scheduled": true
+                            "scheduled": false
                         }
                     }
                 ]
@@ -191,6 +192,10 @@
         }
     ],
     "parameters": [
+        {
+            "name": "APP_ROUTE",
+            "description": "The route that Openshift exposes"
+        },
         {
             "name": "DOCKER_IMAGE",
             "description": "The docker image and version (user/image:tag)",
