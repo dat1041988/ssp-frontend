@@ -78,6 +78,7 @@
                         WZU
                     </a>
                     <div class="navbar-dropdown">
+                        <router-link to="/wzu/artifactory" class="navbar-item">Artifactory</router-link>
                         <router-link to="/wzu/confluence" class="navbar-item">Confluence</router-link>
                         <router-link to="/wzu/jira" class="navbar-item">JIRA</router-link>
                     </div>
