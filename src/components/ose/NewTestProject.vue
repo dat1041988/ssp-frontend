@@ -13,7 +13,7 @@
         <br>
         <article class="message is-info">
             <div class="message-body">
-                - Du kannst jederzeit ein Testprojekt erstellen um etwas auszuprobieren. Es entstehen keine Kosten.<br/>
+                - Du kannst ein Testprojekt erstellen um etwas auszuprobieren<br/>
                 - Ein Test-Projekt enthält deine u-Nummer<br/>
                 - Pods aus einem Test-Projekt können jederzeit durch das Cloud-Team gestoppt werden<br/>
                 - Test-Projekte werden automatisch und ohne Rückfrage nach 30 Tagen gelöscht<br/>
