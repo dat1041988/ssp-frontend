@@ -29,9 +29,15 @@
                      :message="errors.first('Kontierungsnummer')">
                 <b-input v-model.trim="billing"
                          name="Kontierungsnummer"
-                         v-validate="'required'">
+                         v-validate="{ rules: { required: true, regex: /^(11|700|777)\d{5}$/} }">
                 </b-input>
             </b-field>
+            <b-message type="is-info">
+                Es sind nur die u.s. Kontierungselemente erlaubt:<br>
+                - PSP-Nummer (inkl. Phasenbezeichnung)<br>
+                - Innenauftrags-Nummer<br>
+                - Kostenstellen-Nummer
+            </b-message>
 
             <b-field label="MEGA-ID">
                 <b-input v-model.trim="megaId"></b-input>
