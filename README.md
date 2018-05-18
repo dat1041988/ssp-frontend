@@ -8,7 +8,7 @@ This is the web UI for https://github.com/SchweizerischeBundesbahnen/ssp-backend
 oc new-project ose-selfservice-frontend
 
 # Start the frontend with
-oc new-app -p SSP_BACKEND_URL=https://backend-url.com -f ssp-frontend-template.json
+oc new-app -p SSP_BACKEND_URL=https://backend-url.com -p WZU_BACKEND_URL=https://wzu-backend-url.com -f ssp-frontend-template.json
 ```
 
 ### Environment variables
