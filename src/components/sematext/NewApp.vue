@@ -74,6 +74,12 @@
                 </b-input>
             </b-field>
 
+            <b-field label="Discount Code">
+                <b-input v-model.trim="discountcode"
+                         name="Discountcode">
+                </b-input>
+            </b-field>
+
             <button :disabled="errors.any()"
                     v-bind:class="{'is-loading': loading}"
                     class="button is-primary">Logsene App erstellen
@@ -92,11 +98,13 @@
                 planId: '',
                 limit: '',
                 billing: '',
+                discountcode: '',
                 loading: false
             };
         },
         mounted: function () {
             this.getAppPlans();
+            this.getDiscountCode();
         },
         methods: {
             updateLimit: function() {
@@ -107,6 +115,15 @@
                         }
                     });
                 }
+            },
+            getDiscountCode: function() {
+                this.loading = true;
+                this.$http.get(this.$store.state.backendURL + '/api/sematext/discountcode').then((res) => {
+                    this.loading = false;
+                    this.discountcode = res.body;
+                }, () => {
+                    this.loading = false;
+                });
             },
             getAppPlans: function () {
                 this.loading = true;
@@ -127,6 +144,7 @@
                             billing: this.billing,
                             planId: this.planId,
                             limit: parseInt(this.limit),
+                            discountCode: this.discountcode,
                             project: this.project
                         }).then(() => {
                             this.loading = false;
