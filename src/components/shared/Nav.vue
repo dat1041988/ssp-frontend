@@ -72,7 +72,18 @@
                         </router-link>
                     </div>
                 </div>
+
+                <div v-if="user" class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        WZU
+                    </a>
+                    <div class="navbar-dropdown">
+                        <router-link to="/wzu/artifactory" class="navbar-item">Artifactory</router-link>
+                    </div>
+                </div>
             </div>
+
+
 
             <div class="navbar-end">
                 <router-link v-if="!user" to="/login" class="navbar-item">

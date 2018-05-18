@@ -62,6 +62,9 @@ const routes = [
     },
     {
         path: '/sematext/changeplan', component: LocalComponents.SematextChangePlan
+    },
+    {
+        path: '/wzu/artifactory', component: LocalComponents.WZUArtifactory
     }
 ];
 
