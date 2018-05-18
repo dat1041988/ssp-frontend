@@ -61,12 +61,6 @@ const routes = [
     },
     {
         path: '/wzu/artifactory', component: LocalComponents.WZUArtifactory
-    },
-    {
-        path: '/wzu/confluence', component: LocalComponents.WZUConfluence
-    },
-    {
-        path: '/wzu/JIRA', component: LocalComponents.WZUJira
     }
 ];
 
