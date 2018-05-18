@@ -64,7 +64,7 @@
                     if (result) {
                         this.loading = true;
 
-                        this.$http.post(this.$store.state.backendURL + '/api/artifactory/createRepository', {
+                        this.$http.post(this.$store.state.wzuURL + '/api/artifactory/createRepository', {
                             repositoryKey: this.repository,
                             repositoryType: this.type,
                             owner: this.owner
