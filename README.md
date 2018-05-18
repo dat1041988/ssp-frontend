@@ -1,6 +1,4 @@
 # General idea
-Build Status: [![Build Status](https://travis-ci.org/SchweizerischeBundesbahnen/cloud-selfservice-portal-frontend.svg?branch=master)](https://travis-ci.org/SchweizerischeBundesbahnen/cloud-selfservice-portal-frontend)
-
 This is the web UI for https://github.com/SchweizerischeBundesbahnen/ssp-backend. For more information about the project see the readme of the backend.
 
 # Installation & Documentation
