@@ -15,29 +15,74 @@
                  :narrowed="true">
 
             <template slot-scope="props">
-                <b-table-column field="name" label="Instance-Name">
+                <b-table-column field="name" label="Name">
                     {{ props.row.name }}
                 </b-table-column>
                 <b-table-column field="account" label="SBB AWS Account">
                     {{ props.row.account }}
                 </b-table-column>
-                <b-table-column field="account" label="State">
+                <b-table-column field="snapshots" label="Snapshots">
+                    <a v-on:click="listEC2Snapshots(props.row)">
+                    {{ props.row.snapshots.length }}
+                    </a>
+                </b-table-column>
+                <b-table-column field="state" label="State">
                     <b-tooltip :label="getStateLabel(props.row)">
                         <a v-on:click="toggleState(props.row)">
                             <b-icon :icon="getStateIcon(props.row)"
                                     :type="getStateType(props.row)">
                             </b-icon>
-                        {{ props.row.state }}
+                            {{ props.row.state }}
                         </a>
                     </b-tooltip>
                 </b-table-column>
             </template>
-
             <div slot="empty" class="has-text-centered">
                 Hier werden deine Instanzen angezeigt, wenn du welche hast.
             </div>
-
         </b-table>
+        <!-- use the modal component, pass in the prop -->
+        <b-modal :active.sync="showModal" @close="closeModal">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-header-title">{{ modalData.name }} ({{ modalData.state }}) </h1>
+                </div>
+                <div class="card-content">
+                    <b-table :data="modalData.snapshots"
+                            v-bind:class="{'is-loading': snapshotLoading}"
+                            :default-sort="['startTime', 'desc']"
+                            :narrowed="true">
+                        <template slot-scope="props">
+                            <b-table-column field="description" label="Beschreibung" :sortable="true">
+                                {{ props.row.description }}
+                            </b-table-column>
+                            <b-table-column field="startTime" label="Datum" :sortable="true">
+                                <b-tooltip :label="moment(props.row.startTime).calendar()">
+                                {{ moment(props.row.startTime).fromNow() }}
+                                </b-tooltip>
+                            </b-table-column>
+                            <b-table-column field="delete" label="Löschen">
+                                <a @click="deleteSnapshot(props.row)">
+                                x
+                                </a>
+                            </b-table-column>
+                        </template>
+                        <div slot="empty" class="has-text-centered">
+                            Keine Snapshots vorhanden
+                        </div>
+                    </b-table>
+                </div>
+                <footer class="card-footer">
+                    <b-select v-model="snapshotVolume">
+                        <option v-for="volume in modalData.volumes" :value="volume.volumeId" :key="volume.deviceName">
+                            {{ volume.deviceName }}
+                        </option>
+                    </b-select>
+                    <b-input v-model="snapshotDescription" name="description" placeholder="Beschreibung"></b-input>
+                    <button class="button" @click="createSnapshot(modalData)">Snapshot erstellen</button>
+                </footer>
+            </div>
+        </b-modal>
     </div>
 </template>
 
@@ -46,7 +91,12 @@
     data() {
       return {
         data: [],
-        loading: false
+        showModal: false,
+        loading: false,
+        snapshotLoading: false,
+        snapshotVolume: "",
+        snapshotDescription: "",
+        modalData: {},
       };
     },
     mounted: function() {
@@ -57,10 +107,54 @@
         this.loading = true;
         this.$http.get(this.$store.state.backendURL + '/api/aws/ec2').then((res) => {
           this.data = res.body.instances;
+        console.log(this.data)
           this.loading = false;
         }, () => {
           this.loading = false;
         });
+      },
+      listEC2Snapshots: function(row) {
+        this.modalData = row
+        this.showModal = true
+      },
+      closeModal: function() {
+        this.showModal = false
+        // reset form data
+        this.snapshotDescription = ""
+        this.snapshotVolume = ""
+        this.snapshotInputInvalid = false
+      },
+      createSnapshot: function(row) {
+        if (this.snapshotDescription == "" || this.snapshotVolume == "") {
+            this.$toast.open({
+                message: 'Bitte fülle alle Felder aus',
+                type: 'is-danger',
+                duration: 7500
+            })
+            return
+        }
+        this.snapshotInputInvalid = false
+        this.snapshotLoading = true;
+        this.$http.post(this.$store.state.backendURL + '/api/aws/snapshots', { instanceId: row.instanceId, volumeId: this.snapshotVolume, description: this.snapshotDescription, account: row.account }).then((res) => {
+          this.modalData.snapshots.unshift(res.body.snapshot)
+          this.snapshotLoading = false;
+        }, () => {
+          this.snapshotLoading = false;
+        });
+        console.log("creating snapshot for instance: "+row.snapshotId)
+      },
+      deleteSnapshot: function(row) {
+        if (confirm("Wollen Sie diesen Snapshot wirklich löschen?\n" + row.description + " ("+row.snapshotId+")")) {
+            this.snapshotLoading = true;
+            this.$http.delete(this.$store.state.backendURL + '/api/aws/snapshots/' + row.account + '/' + row.snapshotId).then((res) => {
+                // remove snapshot from list
+                this.modalData.snapshots.splice(this.modalData.snapshots.indexOf(row), 1)
+                this.snapshotLoading = false;
+            }, () => {
+                this.snapshotLoading = false;
+            });
+            console.log("deleting snapshot: "+row.snapshotId)
+        }
       },
       toggleState: function(row) {
         var nextState;
@@ -73,10 +167,10 @@
         // use running as conditional! the 'else' case should not be stop
         nextState = (row.state == 'running') ? 'stop' : 'start';
 
-        if (nextState == 'start' || confirm("Are you sure you want to stop " + row.name + "?")) {
+        if (nextState == 'start' || confirm("Wollen Sie diese Instanz wirklich stoppen?\n" + row.name)) {
           // change state so that user interface is responsive
           row.state = (row.state == 'running') ? 'stopping' : 'pending';
-          this.$http.post(this.$store.state.backendURL + '/api/aws/ec2/' + row.id + '/' + nextState).then((res) => {
+          this.$http.post(this.$store.state.backendURL + '/api/aws/ec2/' + row.instanceId + '/' + nextState).then((res) => {
             row.state = res.body.state;
           }, () => {
             row.state = 'unknown';

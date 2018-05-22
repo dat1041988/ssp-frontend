@@ -4,6 +4,8 @@ import Buefy from 'buefy';
 import VueResource from 'vue-resource';
 import VeeValidate, { Validator } from 'vee-validate';
 import VeeValidateGerman from 'vee-validate/dist/locale/de';
+import Moment from 'moment';
+import 'moment-timezone';
 // Styles
 import 'buefy/lib/buefy.css';
 import './theme.css';
@@ -18,6 +20,10 @@ import router from './router';
 Vue.use(VueRouter);
 Vue.use(Buefy);
 Vue.use(VueResource);
+
+Moment.locale('de')
+Moment.tz.setDefault("Europe/Zurich")
+Vue.prototype.moment = Moment
 
 Validator.localize('de', VeeValidateGerman);
 Vue.use(VeeValidate);
