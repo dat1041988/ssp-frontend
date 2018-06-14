@@ -31,6 +31,11 @@
                                 type="is-success">
                     <span>Docker</span>
                 </b-radio-button>
+                <b-radio-button v-model="type"
+                                native-value="npm"
+                                type="is-success">
+                    <span>NPM</span>
+                </b-radio-button>
             </b-field>
             <b-field label="Bestellung für anderen User"
                      :type="errors.has('Bestellung für anderen User') ? 'is-danger' : ''"
@@ -59,7 +64,7 @@
             };
         },
         methods: {
-            newArtifactoryRepository: function() {
+            newArtifactoryRepository: function () {
                 this.$validator.validateAll().then((result) => {
                     if (result) {
                         this.loading = true;
