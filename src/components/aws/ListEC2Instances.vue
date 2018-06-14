@@ -119,10 +119,7 @@
       },
       closeModal: function() {
         this.showModal = false
-        // reset form data
-        this.snapshotDescription = ""
-        this.snapshotVolume = ""
-        this.snapshotInputInvalid = false
+        this.resetSnapshotForm()
       },
       createSnapshot: function(row) {
         if (this.snapshotDescription == "" || this.snapshotVolume == "") {
@@ -138,6 +135,7 @@
         this.$http.post(this.$store.state.backendURL + '/api/aws/snapshots', { instanceId: row.instanceId, volumeId: this.snapshotVolume, description: this.snapshotDescription, account: row.account }).then((res) => {
           this.modalData.snapshots.unshift(res.body.snapshot)
           this.snapshotLoading = false;
+          this.resetSnapshotForm()
         }, () => {
           this.snapshotLoading = false;
         });
@@ -155,6 +153,12 @@
             });
             console.log("deleting snapshot: "+row.snapshotId)
         }
+      },
+      resetSnapshotForm: function() {
+        // reset form data
+        this.snapshotDescription = ""
+        this.snapshotVolume = ""
+        this.snapshotInputInvalid = false
       },
       toggleState: function(row) {
         var nextState;
