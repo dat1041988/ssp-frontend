@@ -12,6 +12,7 @@
         <br>
         <b-table :data="data"
                  v-bind:class="{'is-loading': loading}"
+                 detailed
                  :narrowed="true">
 
             <template slot-scope="props">
@@ -36,6 +37,47 @@
                         </a>
                     </b-tooltip>
                 </b-table-column>
+            </template>
+            <template slot="detail" slot-scope="props">
+                <div class="columns">
+                    <div class="column">
+                        <table>
+                            <tr><td>
+                               ImageId:
+                            </td><td>
+                               {{ props.row.imageId }}
+                            </td></tr>
+                            <tr><td>
+                                ImageName:
+                            </td><td>
+                                {{ props.row.imageName }}
+                            </td></tr>
+                            <tr><td>
+                                LaunchTime:
+                            </td><td>
+                                {{ moment(props.row.launchTime).format('LLL') }}
+                            </td></tr>
+                            <tr><td>
+                                InstanceType:
+                            </td><td>
+                                {{ props.row.instanceType }}
+                            </td></tr>
+                            <tr><td>
+                                PrivateIpAddress:
+                            </td><td>
+                                {{ props.row.privateIpAddress }}
+                            </td></tr>
+                         </table>
+                    </div>
+                    <div class="column">
+                        <table>
+                            <tr v-for="tag in props.row.tags">
+                                <td>{{ tag.Key }}:</td>
+                                <td>{{ tag.Value }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </template>
             <div slot="empty" class="has-text-centered">
                 Hier werden deine Instanzen angezeigt, wenn du welche hast.
