@@ -10,11 +10,7 @@
             </div>
         </div>
         <br>
-        <b-table :data="data"
-                 v-bind:class="{'is-loading': loading}"
-                 detailed
-                 :narrowed="true">
-
+        <b-table :data="data" v-bind:class="{'is-loading': loading}" detailed narrowed>
             <template slot-scope="props">
                 <b-table-column field="name" label="Name">
                     {{ props.row.name }}
@@ -93,15 +89,18 @@
                     <b-table :data="modalData.snapshots"
                             v-bind:class="{'is-loading': snapshotLoading}"
                             :default-sort="['startTime', 'desc']"
-                            :narrowed="true">
+                            narrowed>
                         <template slot-scope="props">
-                            <b-table-column field="description" label="Beschreibung" :sortable="true">
+                            <b-table-column field="description" label="Beschreibung" sortable>
                                 {{ props.row.description }}
                             </b-table-column>
-                            <b-table-column field="startTime" label="Datum" :sortable="true">
+                            <b-table-column field="startTime" label="Datum" sortable>
                                 <b-tooltip :label="moment(props.row.startTime).calendar()">
                                 {{ moment(props.row.startTime).fromNow() }}
                                 </b-tooltip>
+                            </b-table-column>
+                            <b-table-column field="disk" label="Disk" sortable>
+                                {{ props.row.deviceName }}
                             </b-table-column>
                             <b-table-column field="delete" label="Löschen">
                                 <a @click="deleteSnapshot(props.row)">
