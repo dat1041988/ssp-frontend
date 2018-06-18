@@ -116,6 +116,7 @@
                 </div>
                 <footer class="card-footer">
                     <b-select v-model="snapshotVolume">
+                        <option value="*">Alle</option>
                         <option v-for="volume in modalData.volumes" :value="volume.volumeId" :key="volume.deviceName">
                             {{ volume.deviceName }}
                         </option>
@@ -174,13 +175,25 @@
         }
         this.snapshotInputInvalid = false
         this.snapshotLoading = true;
-        this.$http.post(this.$store.state.backendURL + '/api/aws/snapshots', { instanceId: row.instanceId, volumeId: this.snapshotVolume, description: this.snapshotDescription, account: row.account }).then((res) => {
-          this.modalData.snapshots.unshift(res.body.snapshot)
-          this.snapshotLoading = false;
-          this.resetSnapshotForm()
-        }, () => {
-          this.snapshotLoading = false;
-        });
+        if (this.snapshotVolume == "*") {
+            for (var i = 0; i < this.modalData.volumes.length; i++) {
+              this.$http.post(this.$store.state.backendURL + '/api/aws/snapshots', { instanceId: row.instanceId, volumeId: this.modalData.volumes[i].volumeId, description: this.snapshotDescription, account: row.account }).then((res) => {
+                this.modalData.snapshots.unshift(res.body.snapshot)
+              }, () => {
+                this.snapshotLoading = false;
+              });
+            }
+            this.snapshotLoading = false;
+            this.resetSnapshotForm()
+        } else {
+          this.$http.post(this.$store.state.backendURL + '/api/aws/snapshots', { instanceId: row.instanceId, volumeId: this.snapshotVolume, description: this.snapshotDescription, account: row.account }).then((res) => {
+            this.modalData.snapshots.unshift(res.body.snapshot)
+            this.snapshotLoading = false;
+            this.resetSnapshotForm()
+          }, () => {
+            this.snapshotLoading = false;
+          });
+        }
         console.log("creating snapshot for instance: "+row.snapshotId)
       },
       deleteSnapshot: function(row) {
