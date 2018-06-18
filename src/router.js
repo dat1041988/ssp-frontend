@@ -65,6 +65,9 @@ const routes = [
     },
     {
         path: '/wzu/artifactory', component: LocalComponents.WZUArtifactory
+    },
+    {
+        path: '/wzu/jira', component: LocalComponents.WZUJira
     }
 ];
 
@@ -97,4 +100,3 @@ router.beforeEach((to, from, next) => {
 });
 
 export default router;
-

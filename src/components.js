@@ -30,6 +30,7 @@ import SematextChangeBilling from './components/sematext/ChangeBilling.vue';
 import SematextChangePlan from './components/sematext/ChangePlan.vue';
 // WZU Components
 import WZUArtifactory from './components/wzu/Artifactory.vue';
+import WZUJira from './components/wzu/JIRA.vue';
 
 
 Vue.component('login', Login);
@@ -61,8 +62,6 @@ export const LocalComponents = {
     SematextNewApp,
     SematextChangeBilling,
     SematextChangePlan,
-    WZUArtifactory
+    WZUArtifactory,
+    WZUJira
 };
-
-
-
