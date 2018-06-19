@@ -13,9 +13,9 @@ import AdminList from './components/ose/AdminList.vue';
 import UpdateBilling from './components/ose/UpdateBilling.vue';
 import NewServiceAccount from './components/ose/NewServiceAccount.vue';
 // Gluster-Components
-import FixVolume from './components/gluster/FixVolume.vue';
-import NewVolume from './components/gluster/NewVolume.vue';
-import GrowVolume from './components/gluster/GrowVolume.vue';
+import FixGluster from './components/volume/FixGluster.vue';
+import NewVolume from './components/volume/NewVolume.vue';
+import GrowVolume from './components/volume/GrowVolume.vue';
 // DDC-Components
 import DDCBilling from './components/ddc/Billing.vue';
 // AWS Components
@@ -61,7 +61,7 @@ export const LocalComponents = {
     NewTestProject,
     UpdateBilling,
     NewServiceAccount,
-    FixVolume,
+    FixGluster,
     NewVolume,
     GrowVolume,
     DDCBilling,

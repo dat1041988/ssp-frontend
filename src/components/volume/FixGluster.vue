@@ -44,7 +44,7 @@
           if (result) {
             this.loading = true;
 
-            this.$http.post(this.$store.state.backendURL + '/api/gluster/volume/fix', {
+            this.$http.post(this.$store.state.backendURL + '/api/ose/volume/gluster/fix', {
               project: this.project
             }).then(() => {
               this.loading = false;

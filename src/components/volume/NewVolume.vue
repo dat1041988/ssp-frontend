@@ -6,11 +6,11 @@
                     <h1 class="title"><i class="material-icons">cloud</i> Persistent Volume anlegen</h1>
                 </div>
                 <h2 class="subtitle">
-                    Hier kannst du ein Persistent Volume für OpenShift auf GlusterFS erstellen</h2>
+                    Hier kannst du ein Persistent Volume für OpenShift erstellen</h2>
             </div>
         </div>
         <br>
-        <form v-on:submit.prevent="createGlusterVolume">
+        <form v-on:submit.prevent="createVolume">
             <b-field label="Projekt-Name"
                      :type="errors.has('Projekt-Name') ? 'is-danger' : ''"
                      :message="errors.first('Projekt-Name')">
@@ -28,11 +28,11 @@
                 <b-input v-model.trim="size"
                          placeholder="500M"
                          name="Grösse"
-                         v-validate="'required'">
+                         v-validate="{ rules: { required: true, regex: /^[0-9]+[GM]$/}}">
                 </b-input>
             </b-field>
             <b-message type="is-info">
-                Mindestgrösse ist 500MB. Grösse angeben mit Einheit (M/G) z.B. 500M oder 5G. Ab 1024M muss G verwendet werden
+                Mindestgrösse ist 500MB (1G für NFS). Grösse angeben mit Einheit (M/G) z.B. 500M oder 5G. Ab 1024M muss G verwendet werden
             </b-message>
 
             <b-field label="Name des Persistent Volume Claims"
@@ -62,8 +62,13 @@
                 </b-radio-button>
             </b-field>
             <b-message type="is-info">
-                Siehe <a
-                    href="https://docs.openshift.com/container-platform/3.3/architecture/additional_concepts/storage.html#pv-access-modes">Dokumentation</a>
+                Siehe <a target="_blank" href="https://docs.openshift.com/container-platform/3.6/architecture/additional_concepts/storage.html#pv-access-modes">Dokumentation</a>
+            </b-message>
+
+            <label class="label">Technologie</label>
+            <b-message type="is-info">
+                Es wird ein {{ technology | capitalize }}-Volume erstellt.
+                Siehe <a target="_blank" href="https://confluence.sbb.ch/x/-LJENQ">Dokumentation</a>
             </b-message>
             <br>
 
@@ -71,6 +76,10 @@
                     v-bind:class="{'is-loading': loading}"
                     class="button is-primary">Persistent Volume erstellen
             </button>
+            <div v-if="progress">
+            Das Volume wird erstellt. Dies kann einige Minuten dauern.
+            <progress :value="progress" max="100"></progress>
+            </div>
         </form>
     </div>
 </template>
@@ -82,29 +91,80 @@
         project: '',
         pvcName: '',
         size: '',
+        progress: '',
         mode: 'ReadWriteOnce',
-        loading: false
+        technology: 'nfs',
+        loading: false,
+        config: {
+            gluster: false,
+            nfs: false,
+            ddc: false,
+        }
       };
     },
+    created: function() {
+        this.$http.get(this.$store.state.backendURL + '/config').then(res => {
+            this.config = res.body
+            // if nfs is not supported, change to gluster instead of nfs
+            if (!this.config.nfs) {
+                this.technology = 'gluster'
+            }
+        })
+    },
     methods: {
-      createGlusterVolume: function() {
+      createVolume: function() {
         this.$validator.validateAll().then((result) => {
           if (result) {
             this.loading = true;
-
-            this.$http.post(this.$store.state.backendURL + '/api/gluster/volume', {
+            this.$http.post(this.$store.state.backendURL + '/api/ose/volume', {
               project: this.project,
               size: this.size,
               pvcName: this.pvcName,
-              mode: this.mode
-            }).then(() => {
-              this.loading = false;
+              mode: this.mode,
+              technology: this.technology
+            }).then((res) => {
+              if (res.body.data.JobId) {
+                this.pollJob(res.body.data.JobId)
+              } else {
+                this.loading = false;
+              }
             }, () => {
               this.loading = false;
             });
           }
         });
+      },
+      pollJob: function(job) {
+        var that = this
+        var poll = setInterval(function() {
+            that.$http.get(that.$store.state.backendURL + '/api/ose/volume/jobs/' + job).then((res) => {
+              that.progress = res.body
+              if (res.body == "100") {
+                that.progress = ''
+                clearInterval(poll)
+                that.loading = false
+                that.$store.commit('setNotification', {
+                    notification: {
+                        type: 'success',
+                        message: 'Das Volume wurde erstellt. Deinem Projekt wurde das PVC hinzugefügt.'
+                    }
+                });
+              }
+            }, () => {
+              that.progress = ''
+              that.loading = false
+              clearInterval(poll)
+            });
+          }, 3000)
       }
+    },
+    filters: {
+        capitalize: function (value) {
+            if (!value) return ''
+            value = value.toString()
+            if (value == 'nfs') return value.toUpperCase()
+            return value.charAt(0).toUpperCase() + value.slice(1)
+        }
     }
   };
 </script>

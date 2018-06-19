@@ -28,13 +28,13 @@ const routes = [
         path: '/ose/updatebilling', component: LocalComponents.UpdateBilling
     },
     {
-        path: '/gluster/newvolume', component: LocalComponents.NewVolume
+        path: '/ose/volume/new', component: LocalComponents.NewVolume
     },
     {
-        path: '/gluster/fixvolume', component: LocalComponents.FixVolume
+        path: '/ose/volume/fixgluster', component: LocalComponents.FixGluster
     },
     {
-        path: '/gluster/growvolume', component: LocalComponents.GrowVolume
+        path: '/ose/volume/grow', component: LocalComponents.GrowVolume
     },
     {
         path: '/ddc/billing', component: LocalComponents.DDCBilling

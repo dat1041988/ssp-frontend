@@ -27,14 +27,14 @@
                         </router-link>
                         <router-link to="/ose/newserviceaccount" class="navbar-item">Service-Account anlegen
                         </router-link>
-                        <hr v-if="config.gluster" class="navbar-divider">
-                        <router-link v-if="config.gluster" to="/gluster/newvolume" class="navbar-item">
+                        <hr v-if="config.gluster || config.nfs" class="navbar-divider">
+                        <router-link v-if="config.gluster || config.nfs" to="/ose/volume/new" class="navbar-item">
                             Persistent Volume anlegen
                         </router-link>
-                        <router-link v-if="config.gluster" to="/gluster/growvolume" class="navbar-item">
+                        <router-link v-if="config.gluster || config.nfs" to="/ose/volume/grow" class="navbar-item">
                             Persistent Volume vergrössern
                         </router-link>
-                        <router-link v-if="config.gluster" to="/gluster/fixvolume" class="navbar-item">
+                        <router-link v-if="config.gluster" to="/ose/volume/fixgluster" class="navbar-item">
                             Gluster Objekte neu anlegen lassen
                         </router-link>
                     </div>
@@ -117,7 +117,8 @@
             return {
                 config: {
                     ddc: false,
-                    gluster: false
+                    gluster: false,
+                    nfs: false,
                 }
             }
         },

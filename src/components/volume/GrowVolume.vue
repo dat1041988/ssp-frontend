@@ -14,7 +14,7 @@
             In OpenShift wird nach dem Vergrössern immer noch die alte Grösse angegeben sein. Dieser Wert lässt sich im Moment leider nicht verändern.
         </b-message>
 
-        <form v-on:submit.prevent="growGlusterVolume">
+        <form v-on:submit.prevent="growVolume">
             <b-field label="Projekt-Name"
                      :type="errors.has('Projekt-Name') ? 'is-danger' : ''"
                      :message="errors.first('Projekt-Name')">
@@ -32,7 +32,7 @@
                 <b-input v-model.trim="newSize"
                          placeholder="100M"
                          name="Grösse"
-                         v-validate="'required'">
+                         v-validate="{ rules: { required: true, regex: /^[0-9]+[GM]$/}}">
                 </b-input>
             </b-field>
             <b-message type="is-info">
@@ -72,12 +72,12 @@
       };
     },
     methods: {
-      growGlusterVolume: function() {
+      growVolume: function() {
         this.$validator.validateAll().then((result) => {
           if (result) {
             this.loading = true;
 
-            this.$http.post(this.$store.state.backendURL + '/api/gluster/volume/grow', {
+            this.$http.post(this.$store.state.backendURL + '/api/ose/volume/grow', {
               project: this.project,
               newSize: this.newSize,
               pvName: this.pvName
