@@ -21,6 +21,7 @@
                 <b-input v-model.trim="project"
                          placeholder="projekt-dev"
                          name="Projekt-Name"
+                         ref="autofocus"
                          v-validate="'required'">
                 </b-input>
             </b-field>

@@ -16,6 +16,7 @@
                          :message="errors.first('Projekt Name')">
                     <b-input v-model.trim="projectname"
                              name="Projekt Name"
+                             ref="autofocus"
                              v-validate="{ rules: { required: true, regex: /^[a-zA-Z0-9\s]+$/} }">
                     </b-input>
                 </b-field>

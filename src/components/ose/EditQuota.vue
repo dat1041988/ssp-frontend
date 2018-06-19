@@ -16,6 +16,7 @@
                      :message="errors.first('Projekt-Name')">
                 <b-input v-model.trim="project"
                          name="Projekt-Name"
+                         ref="autofocus"
                          v-validate="'required'">
                 </b-input>
             </b-field>

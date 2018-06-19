@@ -16,6 +16,7 @@
                      :message="errors.first('Repository Name')">
                 <b-input v-model.trim="repository"
                          name="Repository Name"
+                         ref="autofocus"
                          v-validate="{ rules: { required: true, regex: /^[a-z0-9]+$/} }">
                 </b-input>
             </b-field>

@@ -37,6 +37,17 @@ Vue.component('login', Login);
 Vue.component('navbar', Nav);
 Vue.component('notification', Notification);
 
+Vue.mixin({
+    mounted: function () {
+        this.$nextTick(() => {
+            let field = this.$refs.autofocus
+            if (field) {
+                field.focus()
+            }
+        })
+    }
+})
+
 export const GlobalComponents = {
     App,
     Login

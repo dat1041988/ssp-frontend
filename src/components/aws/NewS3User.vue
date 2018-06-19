@@ -12,6 +12,22 @@
         </div>
         <br>
         <form v-on:submit.prevent="newS3User">
+            <b-field label="Name vom neuen Benutzer"
+                     :type="errors.has('Name vom neuen Benutzer') ? 'is-danger' : ''"
+                     :message="errors.first('Name vom neuen Benutzer')">
+                <b-input type="text"
+                         v-validate="{ rules: { required: true, regex: /^[a-zA-Z0-9\-]+$/} }"
+                         name="Name vom neuen Benutzer"
+                         ref="autofocus"
+                         v-model.number="username">
+                </b-input>
+            </b-field>
+            <b-message type="is-info">
+                Der Name des neuen Benutzers wird mit deinen Angaben wie folgt zusammengestellt:
+                <br/>[BucketName]-[Benutzername]
+                <br/><br/>Beispiel: sbb-my-bucket-prod-user oder sbb-my-app-prod-admin
+            </b-message>
+
             <b-field label="Bucket-Name"
                      :type="errors.has('Bucket-Name') ? 'is-danger' : ''"
                      :message="errors.first('Bucket-Name')">
@@ -28,22 +44,6 @@
                     </option>
                 </b-select>
             </b-field>
-
-            <b-field label="Name vom neuen Benutzer"
-                     :type="errors.has('Name vom neuen Benutzer') ? 'is-danger' : ''"
-                     :message="errors.first('Name vom neuen Benutzer')">
-                <b-input type="text"
-                         v-validate="{ rules: { required: true, regex: /^[a-zA-Z0-9\-]+$/} }"
-                         name="Name vom neuen Benutzer"
-                         v-model.number="username">
-                </b-input>
-            </b-field>
-
-            <b-message type="is-info">
-                Der Name des neuen Benutzers wird mit deinen Angaben wie folgt zusammengestellt:
-                <br/>[BucketName]-[Benutzername]
-                <br/><br/>Beispiel: sbb-my-bucket-prod-user oder sbb-my-app-prod-admin
-            </b-message>
 
             <label class="label">Rechte: Lesen / Schreiben</label>
             <b-field>

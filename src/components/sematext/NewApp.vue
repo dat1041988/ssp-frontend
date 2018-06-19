@@ -17,6 +17,7 @@
                 <b-input v-model.trim="appName"
                          name="App-Name"
                          v-validate="{ rules: { required: true, regex: /^[a-z0-9]([-a-z0-9]*[a-z0-9])$/} }"
+                         ref="autofocus"
                          placeholder="projekt">
                 </b-input>
             </b-field>

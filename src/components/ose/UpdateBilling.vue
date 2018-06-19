@@ -20,6 +20,7 @@
                          placeholder="projekt-dev"
                          name="Projekt-Name"
                          v-validate="'required'"
+                         ref="autofocus"
                          expanded>
                 </b-input>
                 <p class="control">
