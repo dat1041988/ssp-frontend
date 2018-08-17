@@ -29,8 +29,11 @@ import SematextNewApp from './components/sematext/NewApp.vue';
 import SematextChangeBilling from './components/sematext/ChangeBilling.vue';
 import SematextChangePlan from './components/sematext/ChangePlan.vue';
 // WZU Components
+import WZUConfluence from './components/wzu/Confluence.vue';
+import WZUJira from './components/wzu/JIRA.vue';
+import WZUBitbucket from './components/wzu/BitbucketProjekt.vue'
+import WZUBitbucketRepo from './components/wzu/BitbucketRepository.vue';
 import WZUArtifactory from './components/wzu/Artifactory.vue';
-import WZUJira from './components/wzu/Jira.vue';
 
 
 Vue.component('login', Login);
@@ -73,6 +76,9 @@ export const LocalComponents = {
     SematextNewApp,
     SematextChangeBilling,
     SematextChangePlan,
-    WZUArtifactory,
-    WZUJira
+    WZUConfluence,
+    WZUJira,
+    WZUBitbucket,
+    WZUBitbucketRepo,
+    WZUArtifactory
 };
