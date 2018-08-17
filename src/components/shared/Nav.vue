@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <nav class="navbar ">
         <div class="navbar-brand">
             <router-link to="/" class="navbar-item">
@@ -79,6 +79,9 @@
                     </a>
                     <div class="navbar-dropdown">
                         <router-link to="/wzu/jira" class="navbar-item">JIRA</router-link>
+ 			<router-link to="/wzu/confluence" class="navbar-item">Confluence</router-link>
+ 			<router-link to="/wzu/bitbucket" class="navbar-item">Bitbucket Projekt</router-link>
+ 			<router-link to="/wzu/bitubcketrepo" class="navbar-item">Bitbucket Repo</router-link>
                         <router-link to="/wzu/artifactory" class="navbar-item">Artifactory</router-link>
                     </div>
                 </div>

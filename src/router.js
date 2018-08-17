@@ -68,6 +68,15 @@ const routes = [
     },
     {
         path: '/wzu/jira', component: LocalComponents.WZUJira
+    },
+    {
+        path: '/wzu/bitbucket', component: LocalComponents.WZUBitbucket
+    },
+    {
+        path: '/wzu/bitbucketrepo', component: LocalComponents.WZUBitbucketRepo
+    },
+    {
+        path: '/wzu/confluence', component: LocalComponents.WZUConfluence
     }
 ];
 
