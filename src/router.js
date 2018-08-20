@@ -77,6 +77,9 @@ const routes = [
     },
     {
         path: '/wzu/confluence', component: LocalComponents.WZUConfluence
+    },
+    {
+        path: '/wzu/jenkinscredentials', component: LocalComponents.WZUJenkinsCredentials
     }
 ];
 

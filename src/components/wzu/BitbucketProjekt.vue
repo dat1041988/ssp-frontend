@@ -10,7 +10,7 @@
             </div>
         </div>
         <br>
-        <form v-on:submit.prevent="ProjektName">
+        <form v-on:submit.prevent="addToBackendBitbucket">
             <b-field label="Projekt Name"
                      :type="errors.has('Projekt Name') ? 'is-danger' : ''"
                      :message="errors.first('Projekt Name')">
@@ -46,7 +46,7 @@
                 </b-input>
             </b-field>
 
-            <button v-on:click="addToBackendBitbucket" :disabled="errors.any()"
+            <button :disabled="errors.any()"
                     v-bind:class="{'is-loading': loading}"
                     class="button is-primary">Projekt erstellen
             </button>

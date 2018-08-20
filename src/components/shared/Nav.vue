@@ -54,8 +54,10 @@
                     <div class="navbar-dropdown">
                         <router-link to="/aws/lists3buckets" class="navbar-item">AWS S3 Buckets anzeigen</router-link>
                         <router-link to="/aws/news3bucket" class="navbar-item">AWS S3 Bucket erstellen</router-link>
-                        <router-link to="/aws/news3user" class="navbar-item">AWS S3 Bucket Benutzer erstellen</router-link>
-                        <router-link to="/aws/listec2instances" class="navbar-item">AWS EC2 Instanzen anzeigen</router-link>
+                        <router-link to="/aws/news3user" class="navbar-item">AWS S3 Bucket Benutzer erstellen
+                        </router-link>
+                        <router-link to="/aws/listec2instances" class="navbar-item">AWS EC2 Instanzen anzeigen
+                        </router-link>
                     </div>
                 </div>
                 <div v-if="user" class="navbar-item has-dropdown is-hoverable">
@@ -67,7 +69,8 @@
                         <router-link to="/sematext/newapp" class="navbar-item">Logsene-Apps erstellen</router-link>
                         <router-link to="/sematext/changeplan" class="navbar-item">Logsene-Apps Plan & Limite ändern
                         </router-link>
-                        <router-link to="/sematext/changebilling" class="navbar-item">Logsene-Apps Projekt & Kontierungsnummer
+                        <router-link to="/sematext/changebilling" class="navbar-item">Logsene-Apps Projekt &
+                            Kontierungsnummer
                             ändern
                         </router-link>
                     </div>
@@ -79,15 +82,14 @@
                     </a>
                     <div class="navbar-dropdown">
                         <router-link to="/wzu/jira" class="navbar-item">JIRA</router-link>
- 			<router-link to="/wzu/confluence" class="navbar-item">Confluence</router-link>
- 			<router-link to="/wzu/bitbucket" class="navbar-item">Bitbucket Projekt</router-link>
- 			<router-link to="/wzu/bitubcketrepo" class="navbar-item">Bitbucket Repo</router-link>
+                        <router-link to="/wzu/confluence" class="navbar-item">Confluence</router-link>
+                        <router-link to="/wzu/bitbucket" class="navbar-item">Bitbucket Projekt</router-link>
+                        <router-link to="/wzu/bitubcketrepo" class="navbar-item">Bitbucket Repo</router-link>
                         <router-link to="/wzu/artifactory" class="navbar-item">Artifactory</router-link>
+                        <router-link to="/wzu/jenkinscredentials" class="navbar-item">Jenkins Credentials</router-link>
                     </div>
                 </div>
             </div>
-
-
 
             <div class="navbar-end">
                 <router-link v-if="!user" to="/login" class="navbar-item">

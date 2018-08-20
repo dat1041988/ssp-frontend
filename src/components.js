@@ -31,10 +31,10 @@ import SematextChangePlan from './components/sematext/ChangePlan.vue';
 // WZU Components
 import WZUConfluence from './components/wzu/Confluence.vue';
 import WZUJira from './components/wzu/JIRA.vue';
-import WZUBitbucket from './components/wzu/BitbucketProjekt.vue'
+import WZUBitbucket from './components/wzu/BitbucketProjekt.vue';
 import WZUBitbucketRepo from './components/wzu/BitbucketRepository.vue';
 import WZUArtifactory from './components/wzu/Artifactory.vue';
-
+import WZUJenkinsCredentials from './components/wzu/JenkinsCredentials.vue';
 
 Vue.component('login', Login);
 Vue.component('navbar', Nav);
@@ -43,13 +43,13 @@ Vue.component('notification', Notification);
 Vue.mixin({
     mounted: function () {
         this.$nextTick(() => {
-            let field = this.$refs.autofocus
+            let field = this.$refs.autofocus;
             if (field) {
-                field.focus()
+                field.focus();
             }
-        })
+        });
     }
-})
+});
 
 export const GlobalComponents = {
     App,
@@ -80,5 +80,6 @@ export const LocalComponents = {
     WZUJira,
     WZUBitbucket,
     WZUBitbucketRepo,
-    WZUArtifactory
+    WZUArtifactory,
+    WZUJenkinsCredentials
 };
