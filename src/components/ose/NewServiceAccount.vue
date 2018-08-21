@@ -34,6 +34,22 @@
                 Service-Account Name darf nur Kleinbuchstaben, Zahlen und - enthalten
             </b-message>
 
+            <b-field label="Soll der Service-Account auf dem Jenkins hinterlegt werden (für Deployment Pipeline)?">
+                <b-checkbox v-model="createJenkinsCredential"
+                            true-value="Ja"
+                            false-value="Nein">
+                    {{ createJenkinsCredential }}
+                </b-checkbox>
+            </b-field>
+            <b-field v-if="createJenkinsCredential === 'Ja'"
+                    label="Jenkins Organization-Key"
+                     :type="errors.has('Jenkins Organization-Key') ? 'is-danger' : ''"
+                     :message="errors.first('Jenkins Organization-Key')">
+                <b-input v-model.trim="organizationKey"
+                         name="Jenkins Organization-Key">
+                </b-input>
+            </b-field>
+
             <button :disabled="errors.any()"
                     v-bind:class="{'is-loading': loading}"
                     class="button is-primary">Service-Account erstellen
@@ -43,31 +59,34 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        serviceAccount: '',
-        project: '',
-        loading: false
-      };
-    },
-    methods: {
-      createServiceAccount: function() {
-        this.$validator.validateAll().then((result) => {
-          if (result) {
-            this.loading = true;
+    export default {
+        data() {
+            return {
+                serviceAccount: '',
+                project: '',
+                loading: false,
+                createJenkinsCredential: 'Nein',
+                organizationKey: ''
+            };
+        },
+        methods: {
+            createServiceAccount: function () {
+                this.$validator.validateAll().then((result) => {
+                    if (result) {
+                        this.loading = true;
 
-            this.$http.post(this.$store.state.backendURL + '/api/ose/serviceaccount', {
-              project: this.project,
-              serviceAccount: this.serviceAccount
-            }).then(() => {
-              this.loading = false;
-            }, () => {
-              this.loading = false;
-            });
-          }
-        });
-      }
-    }
-  };
+                        this.$http.post(this.$store.state.backendURL + '/api/ose/serviceaccount', {
+                            project: this.project,
+                            organizationKey: this.createJenkinsCredential === 'Ja' ? this.organizationKey : '',
+                            serviceAccount: this.serviceAccount
+                        }).then(() => {
+                            this.loading = false;
+                        }, () => {
+                            this.loading = false;
+                        });
+                    }
+                });
+            }
+        }
+    };
 </script>
