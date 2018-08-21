@@ -10,7 +10,7 @@
             </div>
         </div>
         <br>
-        <form v-on:submit.prevent="RepoName">
+        <form v-on:submit.prevent="addToBackendBitbucket">
             <b-field label="GitFlow-Template laden?"
                      :type="errors.has('Bestellung für anderen User') ? 'is-danger' : ''"
                      :message="errors.first('Bestellung für anderen User')">
@@ -45,7 +45,7 @@
                 </b-input>
             </b-field>
 
-            <button v-on:click="addToBackendBitbucket" :disabled="errors.any()"
+            <button :disabled="errors.any()"
                     v-bind:class="{'is-loading': loading}"
                     class="button is-primary">Projekt erstellen
             </button>

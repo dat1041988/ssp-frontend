@@ -10,7 +10,7 @@
             </div>
         </div>
         <br>
-        <form v-on:submit.prevent="newConfluence">
+        <form v-on:submit.prevent="addToBackendConfluence">
             <b-field label="Space Name"
                      :type="errors.has('Space Name') ? 'is-danger' : ''"
                      :message="errors.first('Space Name')">
@@ -43,7 +43,7 @@
                 </b-input>
             </b-field>
 
-        <button v-on:click="addToBackendConfluence" :disabled="errors.any()"
+        <button :disabled="errors.any()"
                 v-bind:class="{'is-loading': loading}"
                 class="button is-primary">Space erstellen
         </button>

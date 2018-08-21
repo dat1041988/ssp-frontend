@@ -42,7 +42,7 @@
                          v-validate="{ rules: { required: false, regex:/^(u|U)([0-9]{6})$|^(ue|UE|Ue)([0-9]{5})$/ } }">
                 </b-input>
             </b-field>
-            <button v-on:click="addToBackendJira" :disabled="errors.any()"
+            <button :disabled="errors.any()"
                     v-bind:class="{'is-loading': loading}"
                     class="button is-primary">Projekt erstellen
             </button>

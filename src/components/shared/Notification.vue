@@ -3,7 +3,7 @@
                :title="notification.type === 'success' ? 'Erfolgreich' : 'Fehlgeschlagen'"
                :type="'is-' + notification.type"
                :closable="false">
-        {{ notification.message }}
+        <span v-html="notification.message"></span>
     </b-message>
 </template>
 
