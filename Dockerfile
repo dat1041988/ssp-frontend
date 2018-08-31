@@ -16,6 +16,6 @@ COPY --from=builder /tmp/ssp-frontend/dist .
 
 # Fix permissions for OpenShift runtime (random user)
 RUN chmod +x /usr/share/nginx/start.sh \
- && chmod 777 /var/log/nginx /usr/share/nginx/html /var/cache/nginx/
+ && chmod -R 777 /var/log/nginx /usr/share/nginx/html /var/cache/nginx/
 
 CMD /usr/share/nginx/start.sh
